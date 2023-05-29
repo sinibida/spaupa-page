@@ -39,7 +39,7 @@ export default function Wiggly({
     const onDeviceOrientation = (e: DeviceOrientationEvent) => {
       console.log("Hello Please");
       const {alpha, beta, gamma} = e;
-      const range = 90;
+      const range = 30;
       const gclamped = Math.min(Math.max(0, (gamma! + range) / (range * 2)), 1);
       const bclamped = Math.min(Math.max(0, (beta! + range) / (range * 2)), 1);
       setMousePercentage({x: gclamped, y:bclamped})
