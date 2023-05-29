@@ -1,0 +1,53 @@
+.scrollLeft {
+  display: inline-block;
+  -webkit-animation: scrolling-left1 20s linear infinite;
+  animation: scrolling-left1 20s linear infinite;
+}
+
+.scrollRight {
+  display: inline-block;
+  -webkit-animation: scrolling-right1 20s linear infinite;
+  animation: scrolling-right1 20s linear infinite;
+}
+
+/* scrolling-left is continuous/repeatly text */
+@keyframes scrolling-left1 {
+  0% {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(-300%);
+    -webkit-transform: translateX(-300%);
+  }
+}
+
+@-webkit-keyframes scrolling-left1 {
+  0% {
+    -webkit-transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(-300%);
+  }
+}
+
+/* scrolling-left is continuous/repeatly text */
+@keyframes scrolling-right1 {
+  0% {
+    transform: translateX(-300%);
+    -webkit-transform: translateX(-300%);
+  }
+  100% {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes scrolling-right1 {
+  0% {
+    -webkit-transform: translateX(-300%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
