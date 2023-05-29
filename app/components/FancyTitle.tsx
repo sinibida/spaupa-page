@@ -27,7 +27,7 @@ const FancyTitle = (props: Props) => {
   ]
 
   return (
-    <div className="flex flex-col items-stretch gap-4">
+    <div className="flex flex-col items-stretch gap-2 sm:gap-4">
       <ScrollingText text="WELCOME HELLO BONJOUR" scrollDir="right"/>
 
       <span className='text-left sm:text-center text-3xl sm:text-6xl italic'>

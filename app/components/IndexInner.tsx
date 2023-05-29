@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react'
 import ScrollingText from './ScrollingText'
 import FancyTitle from './FancyTitle'
+import IndexInnerContent from './IndexInnerContent'
 
 type Props = {}
 
@@ -30,7 +31,7 @@ const IndexInner = (props: Props) => {
   return (
     <div className="flex flex-col items-stretch text-black gap-4">
       <FancyTitle/>
-
+      <IndexInnerContent/>
     </div>
   )
 }

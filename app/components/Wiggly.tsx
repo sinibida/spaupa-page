@@ -37,14 +37,12 @@ export default function Wiggly({
     window.addEventListener('resize', onResize);
 
     const onDeviceOrientation = (e: DeviceOrientationEvent) => {
-      console.log("Hello Please");
       const {alpha, beta, gamma} = e;
       const range = 30;
       const gclamped = Math.min(Math.max(0, (gamma! + range) / (range * 2)), 1);
       const bclamped = Math.min(Math.max(0, (beta! + range) / (range * 2)), 1);
       setMousePercentage({x: gclamped, y:bclamped})
     }
-    console.log(isMobile);
     window.addEventListener('deviceorientation', onDeviceOrientation);
 
     return () => {
@@ -54,19 +52,20 @@ export default function Wiggly({
   }, [])
 
   useEffect(() => {
+    if (!isMobile) {
+      const onMouseMove = (e: MouseEvent) => {
+        const newMouse = {
+          x: e.clientX / vpSize.x,
+          y: e.clientY / vpSize.y,
+        };
+        setMousePercentage(newMouse);
+      }
   
-    const onMouseMove = (e: MouseEvent) => {
-      const newMouse = {
-        x: e.clientX / vpSize.x,
-        y: e.clientY / vpSize.y,
-      };
-      setMousePercentage(newMouse);
-    }
-
-    document.addEventListener('mousemove', onMouseMove);
-
-    return () => {
-      document.removeEventListener('mousemove', onMouseMove);
+      document.addEventListener('mousemove', onMouseMove);
+  
+      return () => {
+        document.removeEventListener('mousemove', onMouseMove);
+      }
     }
   }, [vpSize]);
 
