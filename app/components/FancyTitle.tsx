@@ -30,10 +30,10 @@ const FancyTitle = (props: Props) => {
     <div className="flex flex-col items-stretch gap-4">
       <ScrollingText text="WELCOME HELLO BONJOUR" scrollDir="right"/>
 
-      <span className='text-center italic'>
+      <span className='text-left sm:text-center text-3xl sm:text-6xl italic'>
       {
         "WELCOME TO MY SPACE".split('').map((x, idx) => (
-          <span key={idx} className="text-6xl text-center" style={weights[idx]}>
+          <span key={idx} style={weights[idx]}>
             {x}
           </span>
         ))
