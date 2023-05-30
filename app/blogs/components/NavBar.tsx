@@ -1,19 +1,25 @@
+'use client';
+
 import FancyTitleText from '@/app/components/FancyTitleText'
+import classNames from 'classnames'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React from 'react'
+import NavLink from './NavLink';
 
 type Props = {}
 
 const NavBar = (props: Props) => {
   return (
-    <nav className='border-b-2 border-black h-12 font-bold flex flex-row items-center justify-between px-8'>
+    <nav className='border-b-2 border-black h-12 flex flex-row items-center justify-between px-8 self-stretch'>
       <Link href="/">
         <FancyTitleText className='text-xl'/>
+        &nbsp;
       </Link>
       <div className='flex flex-row'>
-        <Link href="/blogs">
+        <NavLink href="/blogs">
           Blog
-        </Link>
+        </NavLink>
       </div>
     </nav>
   )
