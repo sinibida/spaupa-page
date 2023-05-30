@@ -30,7 +30,7 @@ const IndexInnerContent = (props: Props) => {
         <span className="inline-block"> </span>
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <LinkBox href="/blogs" className='hover:bg-teal-400'>
+        <LinkBox href="/blogs" className='hover:bg-emerald-200'>
           Blog
         </LinkBox>
       </div>

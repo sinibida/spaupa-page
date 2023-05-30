@@ -11,7 +11,7 @@ type Props = {}
 
 const NavBar = (props: Props) => {
   return (
-    <nav className='border-b-2 border-black h-12 flex flex-row items-center justify-between px-8 self-stretch'>
+    <nav className='border-b-2 border-black h-12 flex flex-row items-center justify-between px-4 sm:px-8 self-stretch hover:bg-emerald-200 transition-colors'>
       <Link href="/">
         <FancyTitleText className='text-xl'/>
         &nbsp;

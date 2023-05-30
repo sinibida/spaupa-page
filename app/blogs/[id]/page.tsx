@@ -22,9 +22,11 @@ export default async function BlogView (params: {
   const { content, frontmatter } = await compilePost(post.source);
   return (
     <>
-      <h1 className='title'>{frontmatter.title}</h1>
+      <h1 className='title px-4 sm:px-2'>{frontmatter.title}</h1>
       <hr/>
-      {content}
+      <div className='px-4 sm:px-2'>
+        {content}
+      </div>
     </>
   )
 }
