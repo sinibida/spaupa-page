@@ -1,10 +1,13 @@
+import classNames from 'classnames'
 import React, { CSSProperties } from 'react'
-import ScrollingText from './ScrollingText'
-import FancyTitleText from './FancyTitleText'
 
-type Props = {}
+type Props = {
+  className?: string
+}
 
-const FancyTitle = (props: Props) => {
+const FancyTitleText = ({
+  className
+}: Props) => {
   const weights: CSSProperties[] = [
     {fontWeight: 100},
     {fontWeight: 144.4444444},
@@ -28,14 +31,19 @@ const FancyTitle = (props: Props) => {
   ]
 
   return (
-    <div className="flex flex-col items-stretch gap-2 sm:gap-4">
-      <ScrollingText text="WELCOME HELLO BONJOUR" scrollDir="right"/>
-
-      <FancyTitleText className='text-left sm:text-center text-3xl sm:text-6xl '/>
-
-      <ScrollingText text="AWESOME WEBSITE BY SPAUPA"/>
-    </div>
+    <span className={classNames(
+      'italic',
+      className
+    )}>
+    {
+      "WELCOME TO MY SPACE".split('').map((x, idx) => (
+        <span key={idx} style={weights[idx]}>
+          {x}
+        </span>
+      ))
+    }
+    </span>
   )
 }
 
-export default FancyTitle
+export default FancyTitleText

@@ -20,7 +20,6 @@ const IndexInner = ({
 
   return (
     <div className="flex flex-col items-stretch text-black gap-4 min-h-0 max-h-full h-full">
-      <FancyTitle/>
       <IndexInnerContent/>
       <div>
         <div className="h-[2px] bg-black"/>
