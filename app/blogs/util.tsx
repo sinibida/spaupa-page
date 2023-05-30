@@ -6,13 +6,13 @@ export interface BlogFrontmatter {
 }
 
 export async function getPost(id: string) {
-  const response = await fetch(`http://localhost:3000/blogs/api/${id}`, {cache: 'no-store'});
+  const response = await fetch(`http://${process.env.VERCEL_URL}/blogs/api/${id}`, {cache: 'no-store'});
 
   return response.json();
 }
 
 export async function getAllPost() {
-  const response = await fetch(`http://localhost:3000/blogs/api`, {cache: 'no-store'});
+  const response = await fetch(`http://${process.env.VERCEL_URL}/blogs/api`, {cache: 'no-store'});
 
   return response.json();
 }
