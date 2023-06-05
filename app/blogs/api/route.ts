@@ -1,14 +1,13 @@
-import { globSync } from "glob";
 import { NextResponse } from "next/server";
 import path from "path";
-import GetMDX from "./getMdx";
+import GetMDX, { BLOG_PATH } from "./util";
+import { readdirSync } from "fs";
 
 export function GET(request: Request) {
-    
-    const pathes = globSync("data/blogs/*");
-    console.log(pathes);
+    const p = BLOG_PATH;
+    const pathes = readdirSync(p);
 
     return NextResponse.json(pathes.map(x => 
-        GetMDX(path.resolve(process.cwd(), x))
+        GetMDX(x)
     ));
 }

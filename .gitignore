@@ -37,3 +37,5 @@ next-env.d.ts
 .vscode/
 process.env
 .env
+
+data/

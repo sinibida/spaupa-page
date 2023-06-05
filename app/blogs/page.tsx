@@ -1,6 +1,6 @@
 import React from 'react'
-import { compilePost, getAllPost, getFrontmatter } from './util';
-import { BlogPost } from './api/getMdx';
+import { BLOG_API_URL, getFrontmatter } from './util';
+import { BlogPost } from './api/util';
 import styles from './page.module.scss';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -8,7 +8,9 @@ import Link from 'next/link';
 type Props = {}
 
 const Page = async (props: Props) => {
-  const post: BlogPost[] = await getAllPost();
+  const post: BlogPost[] = (await (
+    await fetch(BLOG_API_URL, {cache: 'no-store'})
+  ).json() as BlogPost[]).reverse();
 
   const compiled = post.filter(x => !x.error).map(x => (
     getFrontmatter(x.source)

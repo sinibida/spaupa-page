@@ -5,16 +5,10 @@ export interface BlogFrontmatter {
   title: string
 }
 
-export async function getPost(id: string) {
-  const response = await fetch(`http://${process.env.VERCEL_URL}/blogs/api/${id}`, {cache: 'no-store'});
-
-  return response.json();
-}
-
-export async function getAllPost() {
-  const response = await fetch(`http://${process.env.VERCEL_URL}/blogs/api`, {cache: 'no-store'});
-
-  return response.json();
+export const THIS_URL = `http://${process.env.VERCEL_URL}`;
+export const BLOG_API_URL = THIS_URL + "/blogs/api";
+export const getBlogUrlWithId = (id: string) => {
+  return BLOG_API_URL + '/' + id;
 }
 
 export async function compilePost(source: string) {

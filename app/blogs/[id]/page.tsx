@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react'
-import { BlogPost } from '../api/getMdx';
+import { BlogPost } from '../api/util';
 import { MDXRemote, compileMDX } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
-import { compilePost, getPost } from '../util';
+import { compilePost, getBlogUrlWithId } from '../util';
 
 type Props = {}
+
+async function getPost(id: string) {
+  return await (
+    await fetch(getBlogUrlWithId(id), {cache: 'no-store'})
+  ).json();
+}
 
 export default async function BlogView (params: {
   params: {
