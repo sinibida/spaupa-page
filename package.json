@@ -19,6 +19,8 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "glob": "^10.2.6",
+    "google-auth-library": "^8.8.0",
+    "googleapis": "^118.0.0",
     "gray-matter": "^4.0.3",
     "next": "13.4.4",
     "next-mdx-remote": "^4.4.1",

@@ -1,11 +1,11 @@
 import { promises as fs } from "fs";
-import { google, drive_v3 } from "googleapis";
+import { google, drive_v2 } from "googleapis";
 import { GoogleAuth } from "google-auth-library";
 import { Readable } from "stream";
 
-let cachedDrive: drive_v3.Drive | null = null;
+let cachedDrive: (drive_v2.Drive | null) = null;
 
-export async function getDrive() {
+export async function getDrive(): drive_v2.Drive {
     if (cachedDrive)
         return cachedDrive;
 
@@ -27,7 +27,7 @@ function streamToString(stream: Readable): Promise<string> {
     })
 }
 
-export async function getFileContent(drive: drive_v3.Drive, fileId: string) {
+export async function getFileContent(drive: drive_v2.Drive, fileId: string) {
     const driveStream = await drive.files.get({
         fileId: fileId!,
         alt: 'media',
