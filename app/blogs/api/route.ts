@@ -11,6 +11,7 @@ export async function GET(request: Request) {
 
     const drive = await getDrive();
     const searchResult = await drive.files.list({
+        pageSize: 10,
         fields: 'files(id, name)',
         q: `'${process.env.DRIVE_FOLDER_ID}' in parents`
     })
