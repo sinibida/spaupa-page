@@ -13,7 +13,8 @@ export async function GET(request: Request) {
     const searchResult = await drive.files.list({
         pageSize: 10,
         fields: 'files(id, name)',
-        q: `'${process.env.DRIVE_FOLDER_ID}' in parents`
+        //orderBy: 'created_time',
+        q: `'${process.env.DRIVE_FOLDER_ID}' in parents and trashed = false`
     })
     if (!(searchResult.data.files)) {
         return NextResponse.json("Error", {status: 500});
@@ -27,4 +28,8 @@ export async function GET(request: Request) {
     const promisesGranted = await Promise.all(promises);
 
     return NextResponse.json(promisesGranted);
+}
+
+export function DELETE(request: Request) {
+    // wtf....
 }
