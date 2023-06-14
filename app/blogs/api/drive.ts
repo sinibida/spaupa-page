@@ -2,6 +2,9 @@ import { promises as fs } from "fs";
 import { google, drive_v3 } from "googleapis";
 import { GoogleAuth } from "google-auth-library";
 import { Readable } from "stream";
+import path from "path";
+
+const TOKEN_PATH = path.resolve(process.cwd(), "token.json");
 
 let cachedDrive: (drive_v3.Drive | null) = null;
 
@@ -9,7 +12,7 @@ export async function getDrive(): Promise<drive_v3.Drive> {
     if (cachedDrive)
         return cachedDrive;
 
-    const tokenContent = await fs.readFile("token.json");
+    const tokenContent = await fs.readFile(TOKEN_PATH);
     const credentials = JSON.parse(tokenContent.toString());
     const jsonClient = google.auth.fromJSON(credentials);
     const authClient = new GoogleAuth({authClient: jsonClient});
