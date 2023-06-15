@@ -3,6 +3,7 @@ import { google, drive_v3 } from "googleapis";
 import { GoogleAuth } from "google-auth-library";
 import { Readable } from "stream";
 import path from "path";
+import moment from "moment";
 
 const TOKEN_PATH = path.resolve(process.cwd(), "token.json");
 
@@ -21,21 +22,33 @@ export async function getDrive(): Promise<drive_v3.Drive> {
     return drive;
 }
 
-function streamToString(stream: Readable): Promise<string> {
+function chunksToString(chunks: any[], charCount?: number) {
+    const str = Buffer.concat(chunks).toString('utf8');
+    return charCount ? str.substring(0, charCount) : str;
+}
+
+function streamToString(stream: Readable, charCount?: number): Promise<string> {
     const chunks: any[] = [];
+    let readCount: number = 0;
     return new Promise((resolve, reject) => {
-        stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
+        stream.on('data', (chunk: Buffer) => {
+            chunks.push(Buffer.from(chunk))
+            readCount += chunk.length;
+            if (charCount && readCount >= charCount) {
+                resolve(chunksToString(chunks, charCount) + "...")
+            }
+        });
         stream.on('error', (err) => reject(err));
-        stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+        stream.on('end', () => resolve(chunksToString(chunks)));
     })
 }
 
-export async function getFileContent(drive: drive_v3.Drive, fileId: string) {
+export async function getFileContent(drive: drive_v3.Drive, fileId: string, charCount?: number) {
     const driveStream = await drive.files.get({
         fileId: fileId!,
         alt: 'media',
     }, {
         responseType: 'stream'
     })
-    return await streamToString(driveStream.data);
+    return await streamToString(driveStream.data, charCount);
 }

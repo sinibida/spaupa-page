@@ -1,15 +1,22 @@
 import React, { useEffect } from 'react'
-import { BlogPost } from '../api/util';
+import { BlogPost, BlogPostRaw, rawPostToBlogPost } from '../util';
 import { MDXRemote, compileMDX } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
-import { compilePost, getBlogUrlWithId } from '../util';
+import { compileContent, getBlogUrlWithId } from '../util';
+import { MdAccessTime } from 'react-icons/md'
+import styles from './page.module.scss';
+import classNames from 'classnames';
+import moment from 'moment';
 
 type Props = {}
 
 async function getPost(id: string) {
-  return await (
+  const raw = await (
     await fetch(getBlogUrlWithId(id), {cache: 'no-store'})
-  ).json();
+  ).json() as BlogPostRaw;
+  if (raw.error)
+    return null;
+  return rawPostToBlogPost(raw);
 }
 
 export default async function BlogView (params: {
@@ -19,20 +26,26 @@ export default async function BlogView (params: {
 }) {
 
   const { id } = params.params;
-  const post: BlogPost = await getPost(id);
+  const post: BlogPost | null = await getPost(id);
 
-  if (post.error) {
+  if (!post) {
     notFound();
   }
 
-  const { content, frontmatter } = await compilePost(post.source);
+  const content = await compileContent(post.content);
   return (
-    <>
-      <h1 className='title px-4 sm:px-2'>{frontmatter.title}</h1>
-      <hr/>
-      <div className='px-4 sm:px-2'>
-        {content}
+    <div className='px-4 sm:px-8'>
+      <div className='mb-2'>
+        <h1 className='text-5xl/loose sm:text-6xl/loose font-bold'>{post.title}</h1>
+        <h1 className='text-xl inline-flex items-center gap-2'>
+          <MdAccessTime className=''/> 
+          {moment(post.createdTime).format("yyyy-MM-DD")}
+        </h1>
       </div>
-    </>
+      <hr className='mb-2'/>
+      <div className={classNames('', styles.blogContent)}>
+        {content.content}
+      </div>
+    </div>
   )
 }

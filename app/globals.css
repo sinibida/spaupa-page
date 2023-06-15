@@ -6,23 +6,28 @@ body {
   position: relative;
 }
 
+* {
+  @apply scroll-m-0 scroll-p-0;
+}
+
 ::-webkit-scrollbar {
   width: 0.25rem;
+  height: 0.25rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  @apply bg-neutral-100
+  @apply bg-black/10
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-500
+  @apply bg-neutral-500/80
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-neutral-900
+  @apply bg-neutral-500
 }
 
 /* Handle on hover */

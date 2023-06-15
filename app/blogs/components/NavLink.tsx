@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -12,7 +14,8 @@ const NavLink = ({ href, children }: PropsWithChildren<Props>) => {
 
   return (
     <Link href={href} className={classNames(
-      {'font-bold': pathname === href}
+      {'font-bold': pathname === href},
+      'link-invert'
     )}>
       {children}
     </Link>

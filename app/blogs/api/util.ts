@@ -1,8 +1,4 @@
-export interface BlogPost {
-    source: string
-    path: string
-    error?: string
-}
+
 
 // export const RELATIVE_BLOG_PATH = "./data/blogs/";
 // export const BLOG_PATH = path.resolve(process.cwd(), RELATIVE_BLOG_PATH);

@@ -5,7 +5,7 @@ import { google } from "googleapis";
 import { GoogleAuth } from "google-auth-library";
 import { Readable } from "stream";
 import { getDrive, getFileContent } from "../drive";
-import { BlogPost } from "../util";
+import { BlogPostRaw } from "../../util";
 
 interface Params {
     params: {
@@ -18,13 +18,14 @@ export async function GET(request: Request, {params}: Params) {
 
     const drive = await getDrive();
     const searchResult = await drive.files.list({
-        fields: 'files(id)',
+        fields: 'files(id, createdTime)',
         q: `'${process.env.DRIVE_FOLDER_ID}' in parents and name = '${id}.mdx'`
     })
     if (!(searchResult.data.files) || searchResult.data.files.length == 0) {
-        return NextResponse.json<BlogPost>({
+        return NextResponse.json<BlogPostRaw>({
             path: "",
             source: "",
+            createdTime: "",
             error: "Invalid Id"
         }, {status: 400});
     }
@@ -33,9 +34,10 @@ export async function GET(request: Request, {params}: Params) {
     const source = await getFileContent(drive, result.id!);
 
     //return NextResponse.json(GetMDX(id));
-    return NextResponse.json<BlogPost>({
+    return NextResponse.json<BlogPostRaw>({
         source,
         path: id,
+        createdTime: result.createdTime!
     });
 }
 
