@@ -16,7 +16,7 @@ const MDXPre: React.FC<Props> = ({
 
   return (
     <div>
-      <div className='w-fit'>
+      <div className='w-fit max-w-full'>
         <p className='m-0 text-right font-mono text-sm text-neutral-500 italic'>
           [{language}]
         </p>

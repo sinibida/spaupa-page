@@ -32,7 +32,7 @@
     }
 
     pre {
-        @apply bg-black text-white p-2 rounded-md border-l-emerald-800 border-l-4 transition-all overflow-x-auto hover:border-l-emerald-400 w-fit pr-24;
+        @apply bg-black text-white p-2 rounded-md border-l-emerald-800 border-l-4 transition-all overflow-x-auto hover:border-l-emerald-400 w-full pr-24 text-xs sm:text-base;
 
         @import "page-content";
     }
