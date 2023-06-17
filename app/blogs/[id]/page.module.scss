@@ -1,4 +1,4 @@
-.blogContent {
+.blogContent :global {
     h1 {
         @apply text-4xl/loose font-bold
     }
@@ -28,11 +28,13 @@
     }
     
     code:not(pre>code) {
-        @apply bg-black text-white p-0.5 rounded-sm
+        @apply bg-black text-white py-0.5 px-1 rounded-sm
     }
 
     pre {
-        @apply bg-black text-white p-2 rounded-md border-l-emerald-800 border-l-4 transition-all overflow-x-auto hover:border-l-emerald-400;
+        @apply bg-black text-white p-2 rounded-md border-l-emerald-800 border-l-4 transition-all overflow-x-auto hover:border-l-emerald-400 w-fit pr-24;
+
+        @import "page-content";
     }
 
     p {

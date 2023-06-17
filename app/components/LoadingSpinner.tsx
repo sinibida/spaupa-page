@@ -10,7 +10,10 @@ const LoadingSpinner = ({
   className
 }: Props) => {
   return (
-    <div className={className}>
+    <div className={classNames(
+      className,
+      styles.container
+    )}>
       <div className={classNames(styles.ldsRing)}><div><div><div><div><div></div></div></div></div></div></div>
     </div>
   )

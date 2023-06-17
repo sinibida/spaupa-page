@@ -1,29 +1,18 @@
-import {compileMDX} from 'next-mdx-remote/rsc'
+import {MDXRemote, compileMDX} from 'next-mdx-remote/rsc'
 import matter from 'gray-matter'
 import moment from 'moment'
-
-export interface BlogPostRaw {
-  source: string
-  path: string
-  createdTime: string
-  error?: string
-}
-
-export interface BlogPost {
-  content: string
-  id: string
-  title: string
-  createdTime: Date
-}
-
-export interface BlogFrontmatter {
-  title: string
-}
+import {BlogPost, BlogPostRaw} from './types';
+import MDXPre from './components/mdx/MDXPre';
 
 export const THIS_URL = `http://${process.env.VERCEL_URL}`;
 export const BLOG_API_URL = THIS_URL + "/blogs/api";
 export const getBlogUrlWithId = (id: string) => {
   return BLOG_API_URL + '/' + id;
+}
+
+// Schema for frontmatter of .mdx files
+export interface BlogFrontmatter {
+    title: string
 }
 
 export function getFrontmatter(source: string) {
@@ -47,14 +36,23 @@ export const rawPostToBlogPost = (raw: BlogPostRaw): BlogPost => {
 
   return {
     content,
-    createdTime: parseDriveDate(raw.createdTime),
+    createdTime: parseDriveDate(createdTime),
     id: path,
     title: data.title
   }
 }
 
 export async function compileContent(content: string) {
-  return await compileMDX({
-    source: content
+  // return await compileMDX({
+  //   source: content,
+  //   components: {
+  //     code: (props) => <MDXCode {...props}/>
+  //   }
+  // })
+  return await MDXRemote({
+    source: content,
+    components: {
+      pre: (props) => <MDXPre {...props}/>
+    }
   })
 }

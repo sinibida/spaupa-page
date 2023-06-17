@@ -1,6 +1,22 @@
+.container {
+  border: solid #000 2px;
+  animation: rot 16s linear infinite;
+}
+
+@keyframes rot {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
 .ldsRing {
   display: inline-block;
   position: relative;
+  min-width: 4rem;
+  min-height: 4rem;
   width: 100%;
   height: 100%;
 }

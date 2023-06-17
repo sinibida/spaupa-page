@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import NavBar from './components/NavBar'
 import './layout.scss'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 export const metadata = {
   title: 'Blog de SPAUPA',
@@ -15,10 +16,16 @@ const Layout = ({
   children
 }: Props) => {
   return (
-    <div className='bg-white flex flex-col items-center h-screen justify-between layout-blogs'>
+    <div className='bg-white flex flex-col items-center min-h-screen justify-between layout-blogs'>
       <NavBar/>
-      <main className=' w-[48rem] max-w-full mb-auto'>
-        {children}
+      <main className=' w-[72rem] max-w-full mb-auto'>
+        <Suspense fallback={
+        <div>
+          <LoadingSpinner className='w-16 h-16 mx-auto my-4'/>
+        </div>}
+        >
+          {children}
+        </Suspense>
       </main>
       <footer className='mt-4 p-8 bg-black w-full text-white'>
         <div>

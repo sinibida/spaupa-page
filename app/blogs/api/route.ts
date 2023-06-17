@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import path from "path";
 import { readdirSync } from "fs";
 import { getDrive, getFileContent } from "./drive";
-import { BlogPostRaw } from "../util";
+import { BlogPostRaw } from "../types";
 import moment from "moment";
 
 const PREVIEW_CHAR_COUNT = 200;

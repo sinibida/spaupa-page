@@ -1,0 +1,21 @@
+.hljs- {
+    &comment {
+        @apply text-emerald-500/50 italic;
+    }
+
+    &keyword {
+        @apply text-emerald-300;
+    }
+
+    &attr {
+        @apply text-orange-200;
+    }
+
+    &built_in {
+        @apply text-purple-300;
+    }
+}
+
+.linenumber {
+    @apply text-neutral-500/50;
+}

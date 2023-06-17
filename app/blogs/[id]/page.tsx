@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { BlogPost, BlogPostRaw, rawPostToBlogPost } from '../util';
+import { rawPostToBlogPost } from '../util';
+import {BlogPost, BlogPostRaw} from '../types';
 import { MDXRemote, compileMDX } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import { compileContent, getBlogUrlWithId } from '../util';
@@ -7,6 +8,8 @@ import { MdAccessTime } from 'react-icons/md'
 import styles from './page.module.scss';
 import classNames from 'classnames';
 import moment from 'moment';
+
+// TODO: Add Suspense
 
 type Props = {}
 
@@ -24,7 +27,6 @@ export default async function BlogView (params: {
     id: string
   }
 }) {
-
   const { id } = params.params;
   const post: BlogPost | null = await getPost(id);
 
@@ -33,10 +35,13 @@ export default async function BlogView (params: {
   }
 
   const content = await compileContent(post.content);
+
   return (
     <div className='px-4 sm:px-8'>
       <div className='mb-2'>
-        <h1 className='text-5xl/loose sm:text-6xl/loose font-bold'>{post.title}</h1>
+        <h1 className='text-4xl/relaxed sm:text-5xl/relaxed font-bold'>
+          {post.title}
+        </h1>
         <h1 className='text-xl inline-flex items-center gap-2'>
           <MdAccessTime className=''/> 
           {moment(post.createdTime).format("yyyy-MM-DD")}
@@ -44,7 +49,7 @@ export default async function BlogView (params: {
       </div>
       <hr className='mb-2'/>
       <div className={classNames('', styles.blogContent)}>
-        {content.content}
+        {content}
       </div>
     </div>
   )

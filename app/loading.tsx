@@ -8,7 +8,7 @@ const Loading = (props: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <LoadingSpinner className={styles.spinner}/>
+        <LoadingSpinner className='w-24 h-24'/>
         <div className={styles.loadingText}>
           LOADING...
         </div>

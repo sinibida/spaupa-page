@@ -5,7 +5,7 @@ import { google } from "googleapis";
 import { GoogleAuth } from "google-auth-library";
 import { Readable } from "stream";
 import { getDrive, getFileContent } from "../drive";
-import { BlogPostRaw } from "../../util";
+import { BlogPostRaw } from "../../types";
 
 interface Params {
     params: {
