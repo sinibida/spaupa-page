@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { rawPostToBlogPost } from '../util';
 import {BlogPost, BlogPostRaw} from '../types';
-import { MDXRemote, compileMDX } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
-import { compileContent, getBlogUrlWithId } from '../util';
+import { getBlogUrlWithId } from '../util';
 import { MdAccessTime } from 'react-icons/md'
-import styles from './page.module.scss';
-import classNames from 'classnames';
 import moment from 'moment';
+import PostContent from './components/PostContent';
 
 // TODO: Add Suspense
 
@@ -34,8 +32,6 @@ export default async function BlogView (params: {
     notFound();
   }
 
-  const content = await compileContent(post.content);
-
   return (
     <div className='px-4 sm:px-8'>
       <div className='mb-2'>
@@ -48,9 +44,7 @@ export default async function BlogView (params: {
         </h1>
       </div>
       <hr className='mb-2'/>
-      <div className={classNames('', styles.blogContent)}>
-        {content}
-      </div>
+      <PostContent source={post.content}/>
     </div>
   )
 }

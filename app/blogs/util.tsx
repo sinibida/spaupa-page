@@ -1,8 +1,9 @@
 import {MDXRemote, compileMDX} from 'next-mdx-remote/rsc'
-import matter from 'gray-matter'
+import fm from 'front-matter'
 import moment from 'moment'
 import {BlogPost, BlogPostRaw} from './types';
 import MDXPre from './components/mdx/MDXPre';
+import MDXImg from './components/mdx/MDXImg';
 
 export const THIS_URL = `http://${process.env.VERCEL_URL}`;
 export const BLOG_API_URL = THIS_URL + "/blogs/api";
@@ -16,11 +17,11 @@ export interface BlogFrontmatter {
 }
 
 export function getFrontmatter(source: string) {
-  const {data, content} = matter(source);
+  const {attributes, body} = fm(source);
 
   return {
-    data: data as BlogFrontmatter,
-    content
+    data: attributes as BlogFrontmatter,
+    content: body
   };
 }
 
@@ -42,17 +43,22 @@ export const rawPostToBlogPost = (raw: BlogPostRaw): BlogPost => {
   }
 }
 
-export async function compileContent(content: string) {
-  // return await compileMDX({
-  //   source: content,
-  //   components: {
-  //     code: (props) => <MDXCode {...props}/>
-  //   }
-  // })
-  return await MDXRemote({
-    source: content,
-    components: {
-      pre: (props) => <MDXPre {...props}/>
-    }
-  })
-}
+// export async function compileContent(source: string) {
+//   // return await compileMDX({
+//   //   source: content,
+//   //   components: {
+//   //     code: (props) => <MDXCode {...props}/>
+//   //   }
+//   // })
+//   console.log(source);
+//   const compiled = await compileMDX({
+//     source,
+//     components: {
+//       pre: (props) => <MDXPre {...props}/>,
+//       img: (props) => <MDXImg {...props}/>
+//     }
+//   })
+//   return <div>
+//     {compiled.content}
+//   </div>
+// }

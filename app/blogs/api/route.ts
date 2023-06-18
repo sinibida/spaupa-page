@@ -16,7 +16,7 @@ export async function GET(request: Request) {
         pageSize: 10,
         fields: 'files(id, name, createdTime)',
         orderBy: 'createdTime desc',
-        q: `'${process.env.DRIVE_FOLDER_ID}' in parents and trashed = false`
+        q: `'${process.env.DRIVE_FOLDER_ID}' in parents and trashed = false and name contains '.mdx'`
     })
     if (!(searchResult.data.files)) {
         return NextResponse.json<BlogPostRaw[]>([], {status: 500});

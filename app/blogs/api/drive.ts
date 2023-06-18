@@ -44,11 +44,18 @@ function streamToString(stream: Readable, charCount?: number): Promise<string> {
 }
 
 export async function getFileContent(drive: drive_v3.Drive, fileId: string, charCount?: number) {
-    const driveStream = await drive.files.get({
-        fileId: fileId!,
-        alt: 'media',
-    }, {
-        responseType: 'stream'
-    })
-    return await streamToString(driveStream.data, charCount);
+    try {
+        const driveStream = await drive.files.get({
+            fileId: fileId!,
+            alt: 'media',
+        }, {
+            responseType: 'stream'
+        })
+        return await streamToString(driveStream.data, charCount);
+    } catch(e) {
+        console.error(`ERROR: getFileContent(${drive}, ${fileId}, ${charCount})`)
+        console.error(e);
+
+        return "";
+    }
 }

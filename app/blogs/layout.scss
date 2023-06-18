@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 .layout-blogs {
-    a.link-invert {
-        @apply hover:bg-black hover:text-white active:bg-purple-500 active:text-white px-2
-    }
-    
-    a.link-dotted {
-        @apply underline decoration-dotted hover:decoration-solid;
+    a {
+        &.dotted {
+            @apply underline decoration-dotted hover:decoration-solid;
+        }
+        &.link-invert {
+            @apply no-underline text-black hover:bg-black hover:text-white active:bg-purple-500 active:text-white px-2
+        }
     }
 
     hr {

@@ -1,5 +1,6 @@
+import classNames from 'classnames';
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Noto_Sans_KR } from 'next/font/google'
 
 export const metadata = {
   title: 'WELCOME TO MY SPACE',
@@ -10,6 +11,11 @@ const InterFont = Inter({
   subsets: ['latin']
 });
 
+// const NotoSansKorean = Noto_Sans_KR({
+//   subsets: ['latin'],
+//   weight: ['100', '300', '400', '500', '700', '900']
+// })
+
 export default function RootLayout({
   children,
 }: {
@@ -17,7 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={InterFont.className}>
+      <body className={classNames(
+        InterFont.className
+      )}>
         {children}
       </body>
     </html>
