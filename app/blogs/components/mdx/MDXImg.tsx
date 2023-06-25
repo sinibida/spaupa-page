@@ -21,9 +21,14 @@ const MDXImg: React.FC<Props> = ({
   ...propsRest
 }: Props) => {
   const formattedSrc = src && formatSrc(src);
+
+  const titleArgs = title ? title.split('|') : [undefined];
+  const actualTitle = titleArgs[0];
+  const width = titleArgs[1];
+
   return (
-    <img src={formattedSrc} title={title} {...propsRest}/>
-) 
+    <img src={formattedSrc} title={actualTitle} {...propsRest} width={width}/>
+  ) 
 }
 
 export default MDXImg

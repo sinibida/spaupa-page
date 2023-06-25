@@ -10,6 +10,7 @@ import MDXImg from '../../components/mdx/MDXImg';
 import MDXPre from '../../components/mdx/MDXPre';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
 import rehypeMdxCodeProps from 'rehype-mdx-code-props';
+import MDXAnchor from '../../components/mdx/MDXAnchor';
 
 type Props = {
   source: string
@@ -17,7 +18,8 @@ type Props = {
 
 const components = {
   pre: MDXPre,
-  img: MDXImg
+  img: MDXImg,
+  a: MDXAnchor,
 }
 
 const PostContent = ({

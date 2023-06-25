@@ -20,7 +20,7 @@ const MDXPre: React.FC<Props> = ({
   const language = match ? (match[1] || 'text') : 'text';
 
   return (
-    <div>
+    <div className='preContainer'>
       <div className='w-fit max-w-full'>
         <p className='m-0 text-left font-mono text-sm italic font-bold'>
           {filename || " "}

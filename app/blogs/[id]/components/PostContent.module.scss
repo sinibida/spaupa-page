@@ -35,6 +35,10 @@
         @apply bg-black text-white p-2 rounded-md border-l-emerald-800 border-l-4 transition-all overflow-x-auto hover:border-l-emerald-400 w-full pr-24 text-xs sm:text-base;
     }
 
+    div:has(pre) {
+        @apply my-4;
+    }
+
     &>p {
         @apply text-justify;
         &+p {
